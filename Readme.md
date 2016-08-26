@@ -1,0 +1,1 @@
+This is an experimental project in which I will analyze ratings of Computer Science professors at Arizona State University on ratemyprofessors.com and try to figure out why certain professors have higher rating than other.
