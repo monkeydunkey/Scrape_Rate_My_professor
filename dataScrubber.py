@@ -6,11 +6,18 @@ import urllib2
 import json
 import unicodecsv as csv
 
-id = 45
+'''
+The id can be found by searching for a university at ratemyprofessor.com. The id information
+as a query parameter "sid"
+'''
+id = 45 
 dept = 'Computer+Science'
-rows = 200
+rows = 200 # This parameters specifies how many rows will be pulled in a single request
 start = 0
 SchoolName = 'Arizona+State+University'
+# The parameters needs to be updated to change the university and department
+
+# The WEB API URL to get information about the professors at a given university and department
 Professor_url = "http://search.mtvnservices.com/typeahead/suggest/?solrformat=true\
 &rows=10&callback=noCB&q=*%3A*+AND+schoolid_s%3A{id}+AND+teacherdepartment_s\
 %3A%22{dept}%22&defType=edismax&qf=teacherfullname_t%5E1000+\
@@ -19,6 +26,7 @@ ratings_i+desc&siteName=rmp&rows={rows}&start={start}&fl=pk_id+teacherfirstname_
 teacherlastname_t+total_number_of_ratings_i+averageratingscore_rf+schoolid_s&\
 prefix=schoolname_t%3A%22{SchoolName}%22"
 
+# The WEB API URL to get the rating information
 rating_url = 'http://www.ratemyprofessors.com/paginate/professors/ratings?\
 tid={id}&page={page}'
 
@@ -39,7 +47,7 @@ def writeToCSV(data, fileName):
         dict_writer.writeheader()
         dict_writer.writerows(data)
 
-
+# This function pulls professor information from ratemyprofessor.com
 def pullUniversityInfo():
     returnedRowCount = 200
     returnData = []
@@ -55,7 +63,7 @@ def pullUniversityInfo():
         returnData.extend(data['response']['docs'])
     return returnData
 
-
+# This function pulls rating information from ratemyprofessor.com
 def pullRatingInformation(professors):
     data = []
     for prof in professors:
@@ -74,8 +82,10 @@ def pullRatingInformation(professors):
 
 
 if __name__ == "__main__":
-    # Fetch data about all the professors
+    # Fetch information about all the professors in Computer Science Department at Arizona State University
     professorNames = pullUniversityInfo()
+    # Fetch the ratings for each of professors 
     ratings = pullRatingInformation(professorNames)
+    # Write the data obtained to csv files that would then be consumed by the IPython notebook
     writeToCSV(professorNames, 'professors.csv')
     writeToCSV(ratings, 'ratings.csv')
