@@ -4,6 +4,9 @@ Structure of the project
   1. dataScrubber.py - This file contains the code that pulls data from ratemyprofessor.com and populates professors.csv and ratings.csv
   2. Ratings Analysis.ipynb - Ipython note that contains all the analysis.
 
+TODO :
+  1) Improve visualizations
+  2) Analyze - If stemming is required
+  3) Perform LDA latent Dirichlet Allocation on the comments
+
 License MIT
-
-
