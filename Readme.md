@@ -6,7 +6,7 @@ Structure of the project
 
 TODO :
   1) Improve visualizations
-  2) Analyze - If stemming is required
-  3) Perform LDA latent Dirichlet Allocation on the comments
+  2) Analyze - Does not help in understanding stuff later
+  3) Perform LDA - The Topics/ group of words does not seem to make sense
 
 License MIT
